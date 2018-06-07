@@ -9,11 +9,11 @@ gen_bin: neural-fulldup-threads.cpp
 	$(CC) neural-fulldup-threads.cpp -o neural-fulldup-threads
 
 gen_data: gen_bin
-	./neural-fulldup-threads input.txt > gold
+	./neural-fulldup-threads input.txt detection.log > gold
 
 mv_bin: gen_data
 	mkdir -p $(destDir)
-	mv neural-fulldup-threads gold $(destDir)
+	mv neural-fulldup-threads gold input.txt $(destDir)
 	@echo "All Done, executables should be in the $(destDir)"
 
 

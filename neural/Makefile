@@ -13,7 +13,7 @@ gen_data: gen_bin
 
 mv_bin: gen_data
 	mkdir -p $(destDir)
-	mv neural gold $(destDir)
+	mv neural gold input.txt $(destDir)
 	@echo "All Done, executables should be in the $(destDir)"
 
 

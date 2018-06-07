@@ -187,21 +187,7 @@ int neural(int argc, const char * argv[], std::ostringstream* stream) {
 }
 
 int main(int argc, const char * argv[]){
-    std::ostringstream stream1, stream2;
-    //#pragma omp parallel
-    {
-        //#pragma omp single
-        //#pragma omp task
-        {
-            neural(argc, argv, &stream1);
-        }
-        //#pragma omp single
-        //#pragma omp task
-        {
-            neural(argc, argv, &stream2);
-        }
-    }
-    if (stream1.str().compare(stream2.str()) != 0)
-        exit(-2);// TODO o q fazer quando elas forem diferentes?
-    cout << stream1.str();
+    std::ostringstream stream;
+    neural(argc, argv, &stream);
+    cout << stream.str();
 }

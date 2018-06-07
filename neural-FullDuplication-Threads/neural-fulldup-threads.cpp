@@ -113,7 +113,7 @@ void print ( const vector <float>& m, int n_rows, int n_columns, std::ostringstr
     *stream << endl;
 }
 
-void load_matrix(const char* filename){
+void load_matrix( const char* filename ){
     std::ifstream in(filename);
 
     if (!in) {
@@ -135,15 +135,9 @@ void load_matrix(const char* filename){
     in.close();
 }
 
-int neural(int argc, const char * argv[], std::ostringstream* stream) {
+int neural( const char * input_name, std::ostringstream* stream ) {
 
-    if (argc > 1)
-        load_matrix(argv[1]);
-    else{
-        cout << "File argument missing. Exiting.\n";
-        exit(-1);
-    }
-
+    load_matrix(input_name);
 
     for (unsigned i = 0; i != 500000; ++i) {
 
@@ -187,21 +181,30 @@ int neural(int argc, const char * argv[], std::ostringstream* stream) {
 }
 
 int main(int argc, const char * argv[]){
+    if (argc != 3){
+        fprintf(stderr, "Usage: %s <input file> <detectLog>\n", argv[0]);
+        exit(-1);
+    }
+
     std::ostringstream stream1, stream2;
-    //#pragma omp parallel
+    #pragma omp parallel
     {
-        //#pragma omp single
-        //#pragma omp task
+        #pragma omp single
+        #pragma omp task
         {
-            neural(argc, argv, &stream1);
+            neural( argv[1], &stream1 );
         }
-        //#pragma omp single
-        //#pragma omp task
+        #pragma omp single
+        #pragma omp task
         {
-            neural(argc, argv, &stream2);
+            neural( argv[1], &stream2 );
         }
     }
-    if (stream1.str().compare(stream2.str()) != 0)
-        exit(-2);// TODO o q fazer quando elas forem diferentes?
+    if (stream1.str().compare(stream2.str()) != 0){
+        FILE *fp;
+        if (fp = fopen(argv[2], "a")) 
+                fclose(fp);
+    }
+        
     cout << stream1.str();
 }
