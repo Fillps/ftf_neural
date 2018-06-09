@@ -201,9 +201,11 @@ int main(int argc, const char * argv[]){
         }
     }
     if (stream1.str().compare(stream2.str()) != 0){
-        FILE *fp;
-        if (fp = fopen(argv[2], "a")) 
-                fclose(fp);
+        std::ofstream out(argv[2]);
+        if (out) {
+            out << "Output 1:\n" <<  stream1.str() << "\nOutput 2:\n" << stream2.str();
+            out.close();
+        }
     }
         
     cout << stream1.str();
