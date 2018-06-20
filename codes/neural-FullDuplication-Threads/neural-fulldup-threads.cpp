@@ -1,3 +1,4 @@
+#include <iomanip> 
 #include <iostream>
 #include <vector>
 #include <math.h>
@@ -106,7 +107,8 @@ void print ( const vector <float>& m, int n_rows, int n_columns, std::ostringstr
 
     for( int i = 0; i != n_rows; ++i ) {
         for( int j = 0; j != n_columns; ++j ) {
-            *stream << m[ i * n_columns + j ] << " ";
+            // *stream << m[ i * n_columns + j ] << " ";
+            *stream << std::fixed << std::setprecision(4) << m[ i * n_columns + j ] << " ";
         }
         *stream << '\n';
     }
