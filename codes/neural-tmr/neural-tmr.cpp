@@ -227,13 +227,17 @@ int main(int argc, const char * argv[]){
     //     }
     // } 
     // else 
-    if (stream1.str().compare(stream2.str()) != 0 && stream1.str().compare(stream3.str()) != 0 && stream2.str().compare(stream3.str()) != 0){
+    if (stream1.str().compare(stream2.str()) == 0){
+        cout << stream1.str();
+    } else if(stream1.str().compare(stream3.str()) == 0){
+        cout << stream1.str();
+    } else if (stream2.str().compare(stream3.str()) == 0){
+        cout << stream2.str();
+    } else {
         std::ofstream out(argv[2]);
         if (out) {
-            out << "Output 1:\n" <<  stream1.str() << "\nOutput 2:\n" << stream2.str() << "\nOutput 3:\n" << stream3.str();
+            out << "Output 1:\n" << stream1.str() << "\nOutput 2:\n" << stream2.str() << "\nOutput 3:\n" << stream3.str();
             out.close();
         }
     }
-    
-    cout << stream1.str();
 }
