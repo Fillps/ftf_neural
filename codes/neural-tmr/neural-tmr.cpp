@@ -189,7 +189,7 @@ int main(int argc, const char * argv[]){
         exit(-1);
     }
 
-    std::ostringstream stream1, stream2;
+    std::ostringstream stream1, stream2, stream3;
     #pragma omp parallel
     {
         #pragma omp single
@@ -201,6 +201,11 @@ int main(int argc, const char * argv[]){
         #pragma omp task
         {
             neural( argv[1], &stream2 );
+        }
+        #pragma omp single
+        #pragma omp task
+        {
+            neural( argv[1], &stream3 );
         }
     }
 
@@ -222,10 +227,10 @@ int main(int argc, const char * argv[]){
     //     }
     // } 
     // else 
-    if (stream1.str().compare(stream2.str()) != 0){
+    if (stream1.str().compare(stream2.str()) != 0 && stream1.str().compare(stream3.str()) != 0 && stream2.str().compare(stream3.str()) != 0){
         std::ofstream out(argv[2]);
         if (out) {
-            out << "Output 1:\n" <<  stream1.str() << "\nOutput 2:\n" << stream2.str();
+            out << "Output 1:\n" <<  stream1.str() << "\nOutput 2:\n" << stream2.str() << "\nOutput 3:\n" << stream3.str();
             out.close();
         }
     }
