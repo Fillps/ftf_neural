@@ -64,18 +64,18 @@ print \"\\n\\tCSV files will be stored in \"+csvDirOut+\" folder\\n\"\n\n"
 
 process_list = "### Process errors\n"
 
-gold = [0.0001,
-        0.0005,
-        0.9999,
-        0.9996,
-        0.0001,
-        0.0003,
-        0.9999,
-        0.9998,
-        0.0001,
-        0.0002,
-        0.9999,
-        0.9999]
+gold = [0.000144644,
+	0.000463701,
+	0.999867,
+	0.999616,
+	9.443e-05,
+	0.00028905,
+	0.99986,
+	0.999814,
+	0.000115164,
+	0.000176446,
+	0.999873,
+	0.999853]
 
 cwd = os.getcwd()
 current_folder_path, current_folder_name = os.path.split(os.getcwd())
