@@ -86,7 +86,7 @@ process_file = open("process.py", "w")
 process_file.write(header)
 
 i = 1
-for f in glob.glob('../../logs/*/sdcs/*/*/output'):
+for f in glob.glob('../../logs/*/sdcs*/*/*/output'):
     with open(f) as output:
         print ("Processing file " + f)
         results = np.genfromtxt(f)
