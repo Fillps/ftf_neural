@@ -9,8 +9,6 @@ using std::vector;
 using std::cout;
 using std::endl;
 
-vector<float> X1(16), X2(16), X3(16), y (4), W(4);
-
 vector <float> sigmoid_d (const vector <float>& m1) {
 
     const unsigned long VECTOR_SIZE = m1.size();
@@ -113,7 +111,7 @@ void print ( const vector <float>& m, int n_rows, int n_columns, std::ostringstr
     *stream << endl;
 }
 
-void load_matrix(const char* filename){
+void load_matrix( const char* filename, vector<float> *X1, vector<float> *X2, vector<float> *X3, vector<float> *y, vector<float> *W){
     std::ifstream in(filename);
 
     if (!in) {
@@ -122,27 +120,24 @@ void load_matrix(const char* filename){
     }
 
     for (int i = 0; i < 16; i++)
-        in >> X1[i];
+        in >> (*X1)[i];
     for (int i = 0; i < 16; i++)
-        in >> X2[i];
+        in >> (*X2)[i];
     for (int i = 0; i < 16; i++)
-        in >> X3[i];
+        in >> (*X3)[i];
     for (int i = 0; i < 4; i++)
-        in >> y[i];
+        in >> (*y)[i];
     for (int i = 0; i < 4; i++)
-        in >> W[i];
+        in >> (*W)[i];
 
     in.close();
 }
 
-int neural(int argc, const char * argv[], std::ostringstream* stream) {
+int neural(const char * input_name, std::ostringstream* stream) {
 
-    if (argc > 1)
-        load_matrix(argv[1]);
-    else{
-        cout << "File argument missing. Exiting.\n";
-        exit(-1);
-    }
+    vector<float> X1(16), X2(16), X3(16), y (4), W(4);
+
+    load_matrix(input_name, &X1, &X2, &X3, &y, &W);
 
 
     for (unsigned i = 0; i != 500000; ++i) {
@@ -187,7 +182,17 @@ int neural(int argc, const char * argv[], std::ostringstream* stream) {
 }
 
 int main(int argc, const char * argv[]){
+    if (argc != 3){
+        fprintf(stderr, "Usage: %s <input file> <output file>\n", argv[0]);
+        exit(-1);
+    }
+
     std::ostringstream stream;
-    neural(argc, argv, &stream);
-    cout << stream.str();
+    neural( argv[1], &stream );
+
+    std::ofstream out(argv[2]);
+    if (out){
+        out << stream.str();
+        out.close();
+    }
 }

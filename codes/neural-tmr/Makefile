@@ -9,7 +9,7 @@ gen_bin: neural-tmr.cpp
 	$(CC) neural-tmr.cpp -o neural-tmr
 
 gen_data: gen_bin
-	./neural-tmr input.txt detection.log > gold
+	./neural-tmr input.txt detection.log gold
 
 mv_bin: gen_data
 	mkdir -p $(destDir)

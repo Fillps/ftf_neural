@@ -184,8 +184,8 @@ int neural( const char * input_name, std::ostringstream* stream ) {
 }
 
 int main(int argc, const char * argv[]){
-    if (argc != 3){
-        fprintf(stderr, "Usage: %s <input file> <detectLog>\n", argv[0]);
+    if (argc != 4){
+        fprintf(stderr, "Usage: %s <input file> <detectLog> <output file>\n", argv[0]);
         exit(-1);
     }
 
@@ -222,13 +222,18 @@ int main(int argc, const char * argv[]){
     //     }
     // } 
     // else 
+    
     if (stream1.str().compare(stream2.str()) != 0){
-        std::ofstream out(argv[2]);
-        if (out) {
-            out << "Output 1:\n" <<  stream1.str() << "\nOutput 2:\n" << stream2.str();
-            out.close();
+        std::ofstream err_detected(argv[2]);
+        if (err_detected) {
+            err_detected << "Output 1:\n" <<  stream1.str() << "\nOutput 2:\n" << stream2.str();
+            err_detected.close();
         }
     }
-    
-    cout << stream1.str();
+
+    std::ofstream out(argv[3]);
+    if (out){
+        out << stream1.str();
+        out.close();
+    }
 }

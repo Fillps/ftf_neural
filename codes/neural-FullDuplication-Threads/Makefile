@@ -9,7 +9,7 @@ gen_bin: neural-fulldup-threads.cpp
 	$(CC) neural-fulldup-threads.cpp -o neural-fulldup-threads
 
 gen_data: gen_bin
-	./neural-fulldup-threads input.txt detection.log > gold
+	./neural-fulldup-threads input.txt detection.log gold
 
 mv_bin: gen_data
 	mkdir -p $(destDir)

@@ -9,7 +9,7 @@ gen_bin: neural.cpp
 	$(CC) neural.cpp -o neural
 
 gen_data: gen_bin
-	./neural input.txt > gold
+	./neural input.txt gold
 
 mv_bin: gen_data
 	mkdir -p $(destDir)
