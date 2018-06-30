@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 import os
 import re
 import glob
@@ -90,7 +90,6 @@ for f in glob.glob('../../logs/*/sdcs/*/*/output'):
     with open(f) as output:
         print ("Processing file " + f)
         results = np.genfromtxt(f)
-        print results
         if results.__len__() == gold.__len__():
             process_file.write("#### Example errors from sdc #" + str(i) +"\n" +
                                "#### File: " + f + "\n" +

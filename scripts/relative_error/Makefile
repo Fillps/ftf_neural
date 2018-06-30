@@ -1,8 +1,10 @@
-# R and ggplot must be installed. For ubuntu users: sudo apt install r-base-core r-cran-ggplot2
+# numpy, R and ggplot must be installed. For ubuntu users: sudo pip install numpy | sudo apt install r-base-core r-cran-ggplot2
 all: neural_output_parser.py parseUtils.py createErrLimitsTableforPlot.R lineGraph.R 
+	chmod 777 neural_output_parser.py
 	./neural_output_parser.py
+	chmod 777 process.py
 	./process.py
-	./createErrLimitsTableforPlot.R out.csv benchmark_name errLimit.csv
+	./createErrLimitsTableforPlot.R out.csv neural errLimit.csv
 	./lineGraph.R errLimit.csv errLimit.pdf
 
 clear:
