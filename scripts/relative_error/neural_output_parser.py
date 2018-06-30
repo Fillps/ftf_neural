@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+import sys
 import re
 import glob
 import numpy as np
@@ -77,16 +78,16 @@ gold = [0.000144644,
 	0.999873,
 	0.999853]
 
-cwd = os.getcwd()
-current_folder_path, current_folder_name = os.path.split(os.getcwd())
-print ("Processing directory "+cwd)
+dir = sys.argv[1]
+current_folder_path, current_folder_name = os.path.split(dir)
+print ("Processing directory "+dir)
 print ("Processing folder "+current_folder_name)
 
 process_file = open("process.py", "w")
 process_file.write(header)
 
 i = 1
-for f in glob.glob('../../logs/*/sdcs*/*/*/output'):
+for f in glob.glob(dir+'/*/sdcs*/*/*/output'):
     with open(f) as output:
         print ("Processing file " + f)
         results = np.genfromtxt(f)
