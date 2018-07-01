@@ -84,13 +84,20 @@ per10 = (execSDC10 * 100 / execSDC)
 per12 = (execSDC12 * 100 / execSDC)
 per15 = (execSDC15 * 100 / execSDC)
 
-print(paste("errLimit ; percentage; benchmark"))
+if(args[4] == 0){
+	print(paste("errLimit ; percentage; benchmark"))
+}
+
 errLimit =c("0", "0.1", "0.2", "0.3", "0.4", "0.5", "1", "2", "3", "4", "5", "8", "10", "12", "15")
 percentage = c(100, per0.1, per0.2, per0.3, per0.4, per0.5, per1, per2, per3, per4, per5, per8, per10, per12, per15)
 benchmark = c(args[2], args[2], args[2], args[2], args[2], args[2], args[2], args[2], args[2], args[2], args[2], args[2], args[2], args[2], args[2])
 myDat = data.frame(errLimit, percentage, benchmark)
 
-write.csv(myDat, file = args[3])
+if(args[4] == 1  && file.exists(args[3])){
+	write.table(myDat, file = args[3], sep= ",", append = TRUE, col.names = FALSE, row.names = TRUE)
+} else {
+	write.csv(myDat, file = args[3])
+}
 #print(paste("0.1;",per0.1,";",args[2]))
 #print(paste("0.2;",per0.2,";",args[2]))
 #print(paste("0.3;",per0.3,";",args[2]))
