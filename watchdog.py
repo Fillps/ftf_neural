@@ -6,10 +6,11 @@ import sys
 
 # confFile = "codes/quicksort-FullDuplication/quicksort-fulldup.conf"
 # confFile = "./codes/neural-FullDuplication-Threads/neural-fulldup-threads.conf"
-confFile = "./codes/neural-tmr/neural-tmr.conf"
+# confFile = "./codes/neural-tmr/neural-tmr.conf"
+confFile = "./codes/neural-sigmod/neural-sigmod.conf"
 # detectLog = "/tmp/quick-fulldup-detection.log"
 # detectLog = "/tmp/neural-fulldup-threads-detection.log"
-detectLog = "/tmp/neural-tmr.log"
+detectLog = "/tmp/neural-sigmod-detection.log"
 
 timestampFile = "summary-carolfi.log"
 timestampMaxDiff=60*5 # in seconds
